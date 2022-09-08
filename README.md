@@ -4,7 +4,7 @@
 
 The goal is to check your skills on building a Dapp (decentralized application, aka an application that uses blockchain as backend).
 
-You can fork this repository which contains all the dependencies you'll need: React & [Next.js](https://nextjs.org/), Material UI, [RainbowKit](https://rainbowkit.com) and [ethers.js](https://docs.ethers.io/v5/).
+You can fork this repository which contains all the dependencies you'll need: [React](https://reactjs.org/) & [Next.js](https://nextjs.org/), [Material UI](https://mui.com/material-ui/getting-started/overview/), [RainbowKit](https://rainbowkit.com) and [ethers.js](https://docs.ethers.io/v5/).
 
 **Assignment**
 
@@ -29,33 +29,3 @@ Please build an app that:
 - [ ] Material UI
 
 Bonus: display user ENS
-
----
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about this stack, take a look at the following resources:
-
-- [RainbowKit Documentation](https://rainbowkit.com) - Learn how to customize your wallet connection flow.
-- [wagmi Documentation](https://wagmi.sh) - Learn how to interact with Ethereum.
-- [Next.js Documentation](https://nextjs.org/docs) - Learn how to build a Next.js application.
-
-You can check out [the RainbowKit GitHub repository](https://github.com/rainbow-me/rainbowkit) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
