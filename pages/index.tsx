@@ -1,11 +1,23 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import { Box } from "@mui/material";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import type { NextPage } from "next";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import { useState } from "react";
+import SayMewForm from "../components/SayMewForm";
+import styles from "../styles/Home.module.css";
+import { type MeowType } from "../components/ExistingMeows";
+
+const Meows = dynamic(() => import("../components/ExistingMeows"), {
+  ssr: false,
+});
 
 const Home: NextPage = () => {
+  // here id use either a global state provider or context
+  const [allMeows, setAllMeows] = useState<MeowType[]>([]);
+
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>RainbowKit App</title>
         <meta
@@ -14,70 +26,46 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Box component={"header"}>
+        <Box
+          sx={{
+            zIndex: 1100,
+            position: "fixed",
+            width: "100%",
+            p: 2,
+            display: "flex",
+            justifyContent: "flex-end",
+            background: "cyan",
+          }}
+        >
+          <ConnectButton />
+        </Box>
+      </Box>
+      <Box component={"div"} className={styles.container}>
+        <main className={styles.main}>
+          <h3>
+            There seems to be an issue with closing the connect modal after
+            connecting to wallet, due to{" "}
+            <span style={{ color: "red" }}>react-remove-scroll-bar</span> wont
+            look into it too much (<i>refreshing should fix</i>)
+          </h3>
 
-      <main className={styles.main}>
-        <ConnectButton />
+          <SayMewForm />
 
-        <h1 className={styles.title}>
-          Welcome to <a href="">RainbowKit</a> + <a href="">wagmi</a> +{' '}
-          <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+          <Meows meows={allMeows} setMeows={setAllMeows} />
+        </main>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://rainbowkit.com" className={styles.card}>
-            <h2>RainbowKit Documentation &rarr;</h2>
-            <p>Learn how to customize your wallet connection flow.</p>
-          </a>
-
-          <a href="https://wagmi.sh" className={styles.card}>
-            <h2>wagmi Documentation &rarr;</h2>
-            <p>Learn how to interact with Ethereum.</p>
-          </a>
-
+        <footer className={styles.footer}>
           <a
-            href="https://github.com/rainbow-me/rainbowkit/tree/main/examples"
-            className={styles.card}
+            href="https://rainbow.me"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <h2>RainbowKit Examples &rarr;</h2>
-            <p>Discover boilerplate example RainbowKit projects.</p>
+            Made with ❤️ by your frens at 🌈
           </a>
-
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Next.js Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Next.js Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a href="https://rainbow.me" target="_blank" rel="noopener noreferrer">
-          Made with ❤️ by your frens at 🌈
-        </a>
-      </footer>
-    </div>
+        </footer>
+      </Box>
+    </>
   );
 };
 
