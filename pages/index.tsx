@@ -4,11 +4,14 @@ import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useState } from "react";
-import SayMewForm from "../components/SayMewForm";
 import styles from "../styles/Home.module.css";
 import { type MeowType } from "../components/ExistingMeows";
 
 const Meows = dynamic(() => import("../components/ExistingMeows"), {
+  ssr: false,
+});
+
+const SayMewForm = dynamic(() => import("../components/SayMewForm"), {
   ssr: false,
 });
 

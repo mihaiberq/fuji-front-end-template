@@ -5,9 +5,10 @@ import {
   CircularProgress,
   TextField,
 } from "@mui/material";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { ChangeEvent, useCallback, useState } from "react";
 import { utils } from "ethers";
-import { useContractWrite, usePrepareContractWrite } from "wagmi";
+import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi";
 import ContractAbi from "../utils/contract-abi";
 import { useRouter } from "next/router";
 
@@ -15,6 +16,9 @@ export default function SayMewForm() {
   const [cAddress, setCAddress] = useState(
     "0xd054e5724d7d595b72abbb0c460e0221cd859c8f"
   );
+
+  const modal = useConnectModal();
+  const { isConnected } = useAccount();
 
   const router = useRouter();
 
@@ -74,9 +78,20 @@ export default function SayMewForm() {
         helperText={validationError ? validationError : ""}
       />
       <ButtonGroup sx={{ justifyContent: "center" }}>
-        <Button disabled={isLoading} type="submit">
-          {isLoading ? <CircularProgress /> : "Submit"}
-        </Button>
+        {isConnected ? (
+          <Button disabled={isLoading} type="submit">
+            {isLoading ? <CircularProgress /> : "Submit"}
+          </Button>
+        ) : (
+          <Button
+            type="button"
+            onClick={() => {
+              modal.openConnectModal?.();
+            }}
+          >
+            Login
+          </Button>
+        )}
       </ButtonGroup>
 
       {isError && (
